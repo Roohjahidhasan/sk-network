@@ -16,6 +16,10 @@ export const metadata: Metadata = {
   description:
     "Ultra-low latency fiber optics designed for pro gamers, 4K streamers, and high-performance businesses in Dhaka. 99.9% uptime guarantee.",
   keywords: "fiber internet, broadband, ISP, Dhaka, Bangladesh, gaming internet, 4K streaming",
+  icons: {
+    icon: "/images/sk-logo.png",
+    apple: "/images/sk-logo.png",
+  },
     generator: 'v0.app'
 }
 

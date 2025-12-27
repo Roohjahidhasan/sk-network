@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useCallback } from "react"
 import {
   Wrench,
   Maximize2,
@@ -232,6 +232,12 @@ export function BdixPortal() {
     }
   }
 
+  const handleSectionChange = useCallback((section: Section) => {
+    requestAnimationFrame(() => {
+      setActiveSection(section)
+    })
+  }, [])
+
   return (
     <div className="relative min-h-screen bg-black text-white overflow-hidden">
       <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none opacity-20" />
@@ -285,7 +291,7 @@ export function BdixPortal() {
               return (
                 <button
                   key={tab.id}
-                  onClick={() => setActiveSection(tab.id as Section)}
+                  onClick={() => handleSectionChange(tab.id as Section)}
                   className={`group relative flex items-center gap-2.5 px-6 py-3.5 rounded-2xl font-semibold transition-all ${
                     activeSection === tab.id
                       ? "bg-gradient-to-r from-red-600 to-red-500 text-white shadow-xl shadow-red-500/30"
