@@ -1,11 +1,44 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowRight, Zap, Shield, Clock, Phone } from "lucide-react"
-import { useEffect, useRef } from "react"
+import { ArrowRight, Zap, Shield, Clock, Phone, ChevronLeft, ChevronRight } from "lucide-react"
+import { useEffect, useRef, useState } from "react"
+import Image from "next/image"
+
+const heroSlides = [
+  {
+    image: "/fiber-optic-cables-glowing.jpg",
+    title: "Fiber Optic Network",
+    description: "Experience the power of pure light-speed connectivity",
+  },
+  {
+    image: "/happy-family-using-internet-at-home.jpg",
+    title: "Connected Homes",
+    description: "Bringing families together with seamless internet",
+  },
+  {
+    image: "/network-server-room-modern-technology.jpg",
+    title: "Enterprise Infrastructure",
+    description: "Professional-grade networking equipment",
+  },
+  {
+    image: "/bdix-bangladesh-internet-exchange.jpg",
+    title: "BDIX Connectivity",
+    description: "Lightning-fast local content delivery",
+  },
+]
 
 export function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [currentSlide, setCurrentSlide] = useState(0)
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length)
+    }, 5000)
+
+    return () => clearInterval(timer)
+  }, [])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -77,6 +110,14 @@ export function Hero() {
     window.addEventListener("resize", handleResize)
     return () => window.removeEventListener("resize", handleResize)
   }, [])
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % heroSlides.length)
+  }
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length)
+  }
 
   return (
     <section id="home" className="relative pt-32 pb-20 px-6 overflow-hidden min-h-screen flex items-center">
@@ -153,16 +194,55 @@ export function Hero() {
         </div>
 
         <div className="relative hidden lg:block">
-          <div className="aspect-square rounded-3xl bg-gradient-to-br from-primary/20 to-accent/20 backdrop-blur-3xl border border-border/50 p-8 relative overflow-hidden">
-            <div className="absolute inset-0 bg-[url('/fiber-optic-network-abstract.jpg')] opacity-20" />
-            <div className="relative z-10 h-full flex items-center justify-center">
-              <div className="text-center">
-                <div className="text-8xl font-black mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                  100%
+          <div className="aspect-square rounded-3xl bg-gradient-to-br from-primary/20 to-accent/20 backdrop-blur-3xl border border-border/50 overflow-hidden relative group">
+            {heroSlides.map((slide, index) => (
+              <div
+                key={index}
+                className={`absolute inset-0 transition-all duration-700 ${
+                  index === currentSlide ? "opacity-100 scale-100" : "opacity-0 scale-95"
+                }`}
+              >
+                <Image
+                  src={slide.image || "/placeholder.svg"}
+                  alt={slide.title}
+                  fill
+                  className="object-cover"
+                  priority={index === 0}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
+                <div className="absolute bottom-8 left-8 right-8 z-10">
+                  <h3 className="text-2xl font-bold mb-2">{slide.title}</h3>
+                  <p className="text-muted-foreground">{slide.description}</p>
                 </div>
-                <div className="text-xl font-bold">Fiber Optic</div>
-                <div className="text-muted-foreground">GPON Technology</div>
               </div>
+            ))}
+
+            <button
+              onClick={prevSlide}
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm border border-border flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-background"
+              aria-label="Previous slide"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={nextSlide}
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm border border-border flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-background"
+              aria-label="Next slide"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+              {heroSlides.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentSlide(index)}
+                  className={`w-2 h-2 rounded-full transition-all ${
+                    index === currentSlide ? "bg-primary w-8" : "bg-muted-foreground/50"
+                  }`}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
             </div>
           </div>
         </div>
