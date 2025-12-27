@@ -3,16 +3,18 @@
 import Link from "next/link"
 import Image from "next/image"
 import { useState } from "react"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Sun, Moon } from "lucide-react"
+import { useTheme } from "next-themes"
 
 export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { theme, setTheme } = useTheme()
 
   return (
     <nav className="fixed w-full z-50 backdrop-blur-xl bg-background/80 border-b border-border">
       <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
         <Link href="/" className="flex items-center gap-3">
-          <Image src="/images/logo.png" alt="SK NETWORK" width={180} height={60} className="h-12 w-auto" />
+          <Image src="/images/sk-logo.png" alt="SK NETWORK" width={200} height={80} className="h-14 w-auto" />
         </Link>
 
         <div className="hidden lg:flex space-x-8 text-sm font-semibold">
@@ -37,6 +39,13 @@ export function Navigation() {
         </div>
 
         <div className="flex items-center gap-4">
+          <button
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="p-2 rounded-full hover:bg-accent transition-colors"
+            aria-label="Toggle theme"
+          >
+            {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
           <Link
             href="https://sknetwork.ispdigital.cloud/Account/Login"
             className="bg-primary text-primary-foreground px-6 py-2.5 rounded-full font-bold text-sm hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
