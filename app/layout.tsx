@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { Plus_Jakarta_Sans } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
+import { SupportWidget } from "@/components/support-widget"
 import "./globals.css"
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -28,6 +29,7 @@ export default function RootLayout({
       <body className={`${plusJakarta.className} font-sans antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           {children}
+          <SupportWidget />
         </ThemeProvider>
         <Analytics />
       </body>

@@ -6,6 +6,7 @@ import { SpeedTest } from "@/components/speed-test"
 import { Contact } from "@/components/contact"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
+import { SupportWidget } from "@/components/support-widget"
 
 export default function HomePage() {
   return (
@@ -18,6 +19,7 @@ export default function HomePage() {
       <SpeedTest />
       <Contact />
       <Footer />
+      <SupportWidget />
     </main>
   )
 }

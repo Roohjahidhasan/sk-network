@@ -16,16 +16,18 @@ import {
   Play,
   Search,
   TrendingUp,
-  Clock,
   Star,
   Users,
   Signal,
   ChevronRight,
   Sparkles,
   Zap,
+  Download,
+  Network,
 } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { MediaPlayer } from "@/components/media-player"
 
 type Section = "live" | "movies" | "manu" | "tools"
 
@@ -54,10 +56,41 @@ const movieServers = [
 ]
 
 const manuMediaContent = [
-  { title: "Latest Movies", count: "2,500+", category: "Hollywood & Bollywood" },
-  { title: "Web Series", count: "850+", category: "Netflix, Prime, Disney+" },
-  { title: "TV Shows", count: "1,200+", category: "Popular Series" },
-  { title: "Anime Collection", count: "450+", category: "Subbed & Dubbed" },
+  { title: "Latest Movies", count: "2,500+", category: "Hollywood & Bollywood", icon: Film },
+  { title: "Web Series", count: "850+", category: "Netflix, Prime, Disney+", icon: Monitor },
+  { title: "TV Shows", count: "1,200+", category: "Popular Series", icon: Radio },
+  { title: "Anime Collection", count: "450+", category: "Subbed & Dubbed", icon: Star },
+]
+
+const sampleMediaItems = [
+  {
+    id: 1,
+    title: "Sample Movie 1",
+    thumbnail: "/action-movie-poster.png",
+    type: "video" as const,
+    url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+  },
+  {
+    id: 2,
+    title: "Sample Movie 2",
+    thumbnail: "/thriller-movie-poster.png",
+    type: "video" as const,
+    url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+  },
+  {
+    id: 3,
+    title: "Sample Series",
+    thumbnail: "/drama-series-poster.png",
+    type: "video" as const,
+    url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+  },
+  {
+    id: 4,
+    title: "Sample Image",
+    thumbnail: "/abstract-movie-poster.png",
+    type: "image" as const,
+    url: "/cinematic-landscape.png",
+  },
 ]
 
 export function BdixPortal() {
@@ -66,6 +99,17 @@ export function BdixPortal() {
   const [fullscreenUrl, setFullscreenUrl] = useState<string | null>(null)
   const [searchQuery, setSearchQuery] = useState("")
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [selectedMedia, setSelectedMedia] = useState<{
+    src: string
+    type: "video" | "image"
+    title: string
+  } | null>(null)
+  const [speedTestResult, setSpeedTestResult] = useState<string>("")
+  const [pingResult, setPingResult] = useState<string>("")
+  const [dnsResult, setDnsResult] = useState<string>("")
+  const [isTestingSpeed, setIsTestingSpeed] = useState(false)
+  const [isTestingPing, setIsTestingPing] = useState(false)
+  const [isTestingDns, setIsTestingDns] = useState(false)
 
   useEffect(() => {
     fetch("https://api.ipify.org?format=json")
@@ -126,12 +170,83 @@ export function BdixPortal() {
     return () => window.removeEventListener("resize", handleResize)
   }, [])
 
+  // Functional network testing tools
+  const runSpeedTest = async () => {
+    setIsTestingSpeed(true)
+    setSpeedTestResult("Testing download speed...")
+
+    try {
+      const startTime = Date.now()
+      const response = await fetch("https://speed.cloudflare.com/__down?bytes=25000000", { cache: "no-store" })
+      const data = await response.blob()
+      const endTime = Date.now()
+
+      const durationInSeconds = (endTime - startTime) / 1000
+      const bitsLoaded = data.size * 8
+      const speedMbps = (bitsLoaded / durationInSeconds / 1024 / 1024).toFixed(2)
+
+      setSpeedTestResult(`Download Speed: ${speedMbps} Mbps`)
+    } catch (error) {
+      setSpeedTestResult("Speed test failed. Please try again.")
+    } finally {
+      setIsTestingSpeed(false)
+    }
+  }
+
+  const runPingTest = async () => {
+    setIsTestingPing(true)
+    setPingResult("Testing latency...")
+
+    try {
+      const startTime = Date.now()
+      await fetch("https://www.google.com", { method: "HEAD", cache: "no-store" })
+      const endTime = Date.now()
+      const latency = endTime - startTime
+
+      setPingResult(`Latency: ${latency}ms`)
+    } catch (error) {
+      setPingResult("Ping test failed. Please try again.")
+    } finally {
+      setIsTestingPing(false)
+    }
+  }
+
+  const runDnsLookup = async () => {
+    setIsTestingDns(true)
+    setDnsResult("Looking up DNS...")
+
+    try {
+      const response = await fetch(`https://dns.google/resolve?name=google.com`)
+      const data = await response.json()
+
+      if (data.Answer && data.Answer.length > 0) {
+        const ips = data.Answer.map((answer: any) => answer.data).join(", ")
+        setDnsResult(`DNS: ${ips}`)
+      } else {
+        setDnsResult("No DNS records found")
+      }
+    } catch (error) {
+      setDnsResult("DNS lookup failed. Please try again.")
+    } finally {
+      setIsTestingDns(false)
+    }
+  }
+
   return (
     <div className="relative min-h-screen bg-black text-white overflow-hidden">
       <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none opacity-20" />
       <div className="fixed inset-0 bg-gradient-to-br from-zinc-950 via-black to-zinc-950 pointer-events-none" />
       <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-red-900/20 via-transparent to-transparent pointer-events-none" />
       <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-blue-900/10 via-transparent to-transparent pointer-events-none" />
+
+      {selectedMedia && (
+        <MediaPlayer
+          src={selectedMedia.src}
+          type={selectedMedia.type}
+          title={selectedMedia.title}
+          onClose={() => setSelectedMedia(null)}
+        />
+      )}
 
       <div className="relative z-10 border-b border-white/5 bg-black/60 backdrop-blur-2xl sticky top-0 z-40">
         <div className="mx-auto max-w-7xl px-6 py-6">
@@ -357,27 +472,67 @@ export function BdixPortal() {
             </div>
 
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4 mb-8">
-              {manuMediaContent.map((item, index) => (
-                <div
-                  key={index}
-                  className="group relative bg-gradient-to-br from-zinc-950/80 to-zinc-900/50 backdrop-blur-sm rounded-3xl p-6 border border-zinc-900/50 hover:border-red-500/30 transition-all shadow-xl hover:shadow-2xl hover:shadow-red-500/10 overflow-hidden"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <div className="relative">
-                    <div className="w-12 h-12 rounded-2xl bg-red-500/10 flex items-center justify-center mb-4 group-hover:bg-red-500/20 transition-colors">
-                      <Film className="w-6 h-6 text-red-500" />
-                    </div>
-                    <h3 className="text-lg font-bold mb-1">{item.title}</h3>
-                    <p className="text-zinc-500 text-sm mb-4">{item.category}</p>
-                    <div className="flex items-baseline gap-2">
-                      <p className="text-3xl font-bold bg-gradient-to-r from-white to-zinc-400 bg-clip-text text-transparent">
-                        {item.count}
-                      </p>
-                      <p className="text-zinc-600 text-xs">titles</p>
+              {manuMediaContent.map((item, index) => {
+                const Icon = item.icon
+                return (
+                  <div
+                    key={index}
+                    className="group relative bg-gradient-to-br from-zinc-950/80 to-zinc-900/50 backdrop-blur-sm rounded-3xl p-6 border border-zinc-900/50 hover:border-red-500/30 transition-all shadow-xl hover:shadow-2xl hover:shadow-red-500/10 overflow-hidden"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="relative">
+                      <div className="w-12 h-12 rounded-2xl bg-red-500/10 flex items-center justify-center mb-4 group-hover:bg-red-500/20 transition-colors">
+                        <Icon className="w-6 h-6 text-red-500" />
+                      </div>
+                      <h3 className="text-lg font-bold mb-1">{item.title}</h3>
+                      <p className="text-zinc-500 text-sm mb-4">{item.category}</p>
+                      <div className="flex items-baseline gap-2">
+                        <p className="text-3xl font-bold bg-gradient-to-r from-white to-zinc-400 bg-clip-text text-transparent">
+                          {item.count}
+                        </p>
+                        <p className="text-zinc-600 text-xs">titles</p>
+                      </div>
                     </div>
                   </div>
+                )
+              })}
+            </div>
+
+            <div className="mb-8">
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-2xl font-bold">Media Library</h3>
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+                  <Input placeholder="Search media..." className="pl-10 w-64 bg-zinc-900/50 border-zinc-800" />
                 </div>
-              ))}
+              </div>
+
+              <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                {sampleMediaItems.map((item) => (
+                  <div
+                    key={item.id}
+                    className="group relative bg-zinc-950/50 rounded-2xl overflow-hidden border border-zinc-900/50 hover:border-red-500/30 transition-all cursor-pointer"
+                    onClick={() => setSelectedMedia({ src: item.url, type: item.type, title: item.title })}
+                  >
+                    <div className="aspect-[2/3] relative overflow-hidden bg-zinc-900">
+                      <img
+                        src={item.thumbnail || "/placeholder.svg"}
+                        alt={item.title}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <div className="w-14 h-14 rounded-full bg-red-600 flex items-center justify-center">
+                          <Play className="w-7 h-7 text-white ml-1" />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-4">
+                      <h4 className="font-semibold text-white mb-1">{item.title}</h4>
+                      <p className="text-sm text-zinc-500 capitalize">{item.type}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
 
             <div className="bg-gradient-to-br from-zinc-950/80 to-zinc-900/50 backdrop-blur-sm rounded-3xl p-8 border border-zinc-900/50 shadow-2xl">
@@ -422,80 +577,153 @@ export function BdixPortal() {
                     <Gauge className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold">Speed Test</h3>
-                    <p className="text-sm text-zinc-500">Measure your connection speed</p>
+                    <h3 className="text-2xl font-bold">Speed Test</h3>
+                    <p className="text-sm text-zinc-500">Test your internet connection speed</p>
                   </div>
                 </div>
-                <div className="relative rounded-2xl overflow-hidden border border-zinc-800/50 bg-black">
-                  <iframe src="https://fast.com/" className="w-full h-96" title="Speed Test" />
-                </div>
-              </div>
-
-              <div className="bg-gradient-to-br from-zinc-950/80 to-zinc-900/50 backdrop-blur-sm rounded-3xl p-8 border border-zinc-900/50 hover:border-red-500/30 transition-all shadow-xl flex flex-col justify-center items-center text-center">
-                <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center mb-6 shadow-2xl shadow-red-500/50">
-                  <Globe className="w-10 h-10 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold mb-2">Your IP Address</h3>
-                <p className="text-zinc-500 mb-6">Current network identifier</p>
-                <div className="bg-zinc-950 border border-zinc-800/50 rounded-2xl px-8 py-5 shadow-inner">
-                  <p className="text-4xl font-bold bg-gradient-to-r from-red-400 via-red-500 to-red-600 bg-clip-text text-transparent">
-                    {ipAddress}
-                  </p>
-                </div>
-                <div className="flex items-center gap-4 mt-6">
-                  <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900/50 border border-zinc-800/50">
-                    <Signal className="w-4 h-4 text-emerald-400" />
-                    <span className="text-sm text-zinc-400">Connected</span>
-                  </div>
-                  <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900/50 border border-zinc-800/50">
-                    <Clock className="w-4 h-4 text-blue-400" />
-                    <span className="text-sm text-zinc-400">Low Latency</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {[
-                {
-                  icon: Activity,
-                  title: "Ping Test",
-                  desc: "Check server response time",
-                  color: "from-blue-500 to-blue-600",
-                },
-                {
-                  icon: Wifi,
-                  title: "DNS Lookup",
-                  desc: "Resolve domain names",
-                  color: "from-purple-500 to-purple-600",
-                },
-                {
-                  icon: Monitor,
-                  title: "Bandwidth Monitor",
-                  desc: "Track usage in real-time",
-                  color: "from-emerald-500 to-emerald-600",
-                },
-              ].map((tool, index) => {
-                const Icon = tool.icon
-                return (
-                  <div
-                    key={index}
-                    className="group bg-gradient-to-br from-zinc-950/80 to-zinc-900/50 backdrop-blur-sm rounded-3xl p-6 border border-zinc-900/50 hover:border-red-500/30 transition-all shadow-xl hover:shadow-2xl hover:shadow-red-500/10"
-                  >
-                    <div
-                      className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${tool.color} flex items-center justify-center mb-4 shadow-lg`}
-                    >
-                      <Icon className="w-6 h-6 text-white" />
+                <div className="mb-6">
+                  {speedTestResult && (
+                    <div className="mb-4 p-4 bg-zinc-900/50 rounded-xl border border-zinc-800">
+                      <p className="text-white font-medium">{speedTestResult}</p>
                     </div>
-                    <h3 className="text-lg font-bold mb-2">{tool.title}</h3>
-                    <p className="text-zinc-500 text-sm mb-4">{tool.desc}</p>
-                    <Button className="w-full gap-2 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800/50">
-                      Run Test
-                      <ChevronRight className="w-4 h-4 ml-auto" />
-                    </Button>
+                  )}
+                  <Button
+                    onClick={runSpeedTest}
+                    disabled={isTestingSpeed}
+                    className="w-full gap-2 bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-600"
+                  >
+                    <Gauge className="w-4 h-4" />
+                    {isTestingSpeed ? "Testing..." : "Run Speed Test"}
+                  </Button>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-zinc-950/80 to-zinc-900/50 backdrop-blur-sm rounded-3xl p-8 border border-zinc-900/50 hover:border-red-500/30 transition-all shadow-xl">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center shadow-lg shadow-red-500/50">
+                    <Globe className="w-6 h-6 text-white" />
                   </div>
-                )
-              })}
+                  <div>
+                    <h3 className="text-2xl font-bold">Your IP Address</h3>
+                    <p className="text-sm text-zinc-500">Your public IP address</p>
+                  </div>
+                </div>
+                <div className="p-6 bg-zinc-900/50 rounded-2xl border border-zinc-800/50">
+                  <p className="text-4xl font-bold text-white text-center">{ipAddress}</p>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-zinc-950/80 to-zinc-900/50 backdrop-blur-sm rounded-3xl p-8 border border-zinc-900/50 hover:border-red-500/30 transition-all shadow-xl">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center shadow-lg shadow-red-500/50">
+                    <Activity className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold">Ping Test</h3>
+                    <p className="text-sm text-zinc-500">Test network latency</p>
+                  </div>
+                </div>
+                <div className="mb-6">
+                  {pingResult && (
+                    <div className="mb-4 p-4 bg-zinc-900/50 rounded-xl border border-zinc-800">
+                      <p className="text-white font-medium">{pingResult}</p>
+                    </div>
+                  )}
+                  <Button
+                    onClick={runPingTest}
+                    disabled={isTestingPing}
+                    className="w-full gap-2 bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-600"
+                  >
+                    <Activity className="w-4 h-4" />
+                    {isTestingPing ? "Testing..." : "Run Ping Test"}
+                  </Button>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-zinc-950/80 to-zinc-900/50 backdrop-blur-sm rounded-3xl p-8 border border-zinc-900/50 hover:border-red-500/30 transition-all shadow-xl">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center shadow-lg shadow-red-500/50">
+                    <Network className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold">DNS Lookup</h3>
+                    <p className="text-sm text-zinc-500">Query DNS records</p>
+                  </div>
+                </div>
+                <div className="mb-6">
+                  {dnsResult && (
+                    <div className="mb-4 p-4 bg-zinc-900/50 rounded-xl border border-zinc-800">
+                      <p className="text-white font-medium text-sm break-all">{dnsResult}</p>
+                    </div>
+                  )}
+                  <Button
+                    onClick={runDnsLookup}
+                    disabled={isTestingDns}
+                    className="w-full gap-2 bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-600"
+                  >
+                    <Network className="w-4 h-4" />
+                    {isTestingDns ? "Looking up..." : "Run DNS Lookup"}
+                  </Button>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-zinc-950/80 to-zinc-900/50 backdrop-blur-sm rounded-3xl p-8 border border-zinc-900/50 hover:border-red-500/30 transition-all shadow-xl">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center shadow-lg shadow-red-500/50">
+                    <Wifi className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold">Network Monitor</h3>
+                    <p className="text-sm text-zinc-500">Real-time connection status</p>
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between p-4 bg-zinc-900/50 rounded-xl border border-zinc-800">
+                    <span className="text-zinc-400">Connection Status</span>
+                    <span className="text-emerald-400 font-semibold">Online</span>
+                  </div>
+                  <div className="flex items-center justify-between p-4 bg-zinc-900/50 rounded-xl border border-zinc-800">
+                    <span className="text-zinc-400">Network Type</span>
+                    <span className="text-white font-semibold">Fiber Optic</span>
+                  </div>
+                  <div className="flex items-center justify-between p-4 bg-zinc-900/50 rounded-xl border border-zinc-800">
+                    <span className="text-zinc-400">Signal Strength</span>
+                    <span className="text-white font-semibold">Excellent</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-zinc-950/80 to-zinc-900/50 backdrop-blur-sm rounded-3xl p-8 border border-zinc-900/50 hover:border-red-500/30 transition-all shadow-xl">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center shadow-lg shadow-red-500/50">
+                    <Download className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold">Bandwidth Test</h3>
+                    <p className="text-sm text-zinc-500">Monitor bandwidth usage</p>
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <div className="p-4 bg-zinc-900/50 rounded-xl border border-zinc-800">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-zinc-400 text-sm">Download</span>
+                      <span className="text-white font-semibold">0 MB/s</span>
+                    </div>
+                    <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
+                      <div className="h-full bg-gradient-to-r from-red-600 to-red-500 w-0" />
+                    </div>
+                  </div>
+                  <div className="p-4 bg-zinc-900/50 rounded-xl border border-zinc-800">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-zinc-400 text-sm">Upload</span>
+                      <span className="text-white font-semibold">0 MB/s</span>
+                    </div>
+                    <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
+                      <div className="h-full bg-gradient-to-r from-blue-600 to-blue-500 w-0" />
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </section>
         )}

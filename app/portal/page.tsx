@@ -1,4 +1,5 @@
 import { BdixPortal } from "@/components/bdix-portal"
+import { SupportWidget } from "@/components/support-widget"
 
 export const metadata = {
   title: "BDIX Portal - SK NETWORK",
@@ -6,5 +7,10 @@ export const metadata = {
 }
 
 export default function PortalPage() {
-  return <BdixPortal />
+  return (
+    <>
+      <BdixPortal />
+      <SupportWidget />
+    </>
+  )
 }
