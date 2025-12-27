@@ -1,5 +1,4 @@
 import Link from "next/link"
-import Image from "next/image"
 import { Facebook, Twitter, Instagram } from "lucide-react"
 
 export function Footer() {
@@ -7,7 +6,9 @@ export function Footer() {
     <footer className="bg-[#030406] pt-24 pb-12 px-6 border-t border-white/5">
       <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 mb-16">
         <div className="col-span-1 md:col-span-1">
-          <Image src="/images/sk-logo.png" alt="SK NETWORK" width={150} height={60} className="h-12 w-auto mb-6" />
+          <div className="h-12 w-12 rounded-lg bg-red-600 flex items-center justify-center font-black text-white mb-6">
+            SK
+          </div>
           <p className="text-gray-500 text-sm leading-relaxed mb-8">
             Providing top-tier fiber optic broadband connectivity to home and corporate users since 2018. Leading the
             way in digital infrastructure.
@@ -87,21 +88,7 @@ export function Footer() {
       </div>
 
       <div className="max-w-7xl mx-auto pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
-        <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
-          <p>© 2025 SK NETWORK. All rights reserved.</p>
-          <span className="hidden md:inline">|</span>
-          <p className="text-gray-600">
-            Developed by{" "}
-            <Link
-              href="https://roohjahidhasan.github.io/Portfolio/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary hover:text-primary/80 transition-colors font-semibold"
-            >
-              Md Jahid Hasan
-            </Link>
-          </p>
-        </div>
+        <p>© 2025 SK NETWORK. All rights reserved.</p>
         <div className="flex gap-6">
           <Link href="#" className="hover:text-red-500 transition">
             Privacy Policy
