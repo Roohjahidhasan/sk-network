@@ -1,9 +1,9 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Tv, Film, Wrench, Home, Info, Mail, Briefcase, FileText, Palette } from "lucide-react"
+import { Wrench, Maximize2, X, Radio, Server } from "lucide-react"
 
-type Section = "home" | "live" | "movies" | "tools" | "about" | "contact" | "portfolio" | "services" | "blog"
+type Section = "live" | "movies" | "tools"
 
 const tvChannels = [
   { name: "TSports", url: "http://moviemazic.xyz/live-tv/tsports.html", type: "external" },
@@ -30,7 +30,7 @@ const movieServers = [
 ]
 
 export function BdixPortal() {
-  const [activeSection, setActiveSection] = useState<Section>("home")
+  const [activeSection, setActiveSection] = useState<Section>("live")
   const [ipAddress, setIpAddress] = useState("Loading...")
   const [fullscreenUrl, setFullscreenUrl] = useState<string | null>(null)
 
@@ -41,214 +41,173 @@ export function BdixPortal() {
       .catch(() => setIpAddress("Failed to load IP"))
   }, [])
 
-  const handleTestServers = () => {
-    alert("Testing all servers...")
-  }
-
   return (
-    <div className="min-h-screen bg-black text-white">
-      {/* Navigation */}
-      <nav className="sticky top-0 z-10 bg-red-600 p-4">
-        <div className="flex flex-wrap justify-between items-center gap-4">
-          <div className="flex flex-wrap gap-4">
-            <button onClick={() => setActiveSection("home")} className="hover:text-yellow-400">
-              <Home className="inline w-4 h-4 mr-1" /> Home
-            </button>
-            <button onClick={() => setActiveSection("about")} className="hover:text-yellow-400">
-              <Info className="inline w-4 h-4 mr-1" /> About
-            </button>
-            <button onClick={() => setActiveSection("contact")} className="hover:text-yellow-400">
-              <Mail className="inline w-4 h-4 mr-1" /> Contact
-            </button>
-            <button onClick={() => setActiveSection("portfolio")} className="hover:text-yellow-400">
-              <Palette className="inline w-4 h-4 mr-1" /> Portfolio
-            </button>
-            <button onClick={() => setActiveSection("services")} className="hover:text-yellow-400">
-              <Briefcase className="inline w-4 h-4 mr-1" /> Services
-            </button>
-            <button onClick={() => setActiveSection("blog")} className="hover:text-yellow-400">
-              <FileText className="inline w-4 h-4 mr-1" /> Blog
-            </button>
+    <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950 text-white">
+      <div className="border-b border-white/10 bg-black/40 backdrop-blur-xl sticky top-0 z-40">
+        <div className="mx-auto max-w-7xl px-6 py-6">
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <h1 className="text-4xl font-bold bg-gradient-to-r from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent">
+                BDIX Portal
+              </h1>
+              <p className="text-zinc-400 mt-1">Access streaming content and network tools</p>
+            </div>
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-800/50 border border-zinc-700/50">
+              <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-sm text-zinc-300">Online</span>
+            </div>
           </div>
-          <div className="flex flex-wrap gap-4">
-            <button onClick={() => setActiveSection("live")} className="hover:text-yellow-400">
-              <Tv className="inline w-4 h-4 mr-1" /> Live TV
+
+          <div className="flex gap-3">
+            <button
+              onClick={() => setActiveSection("live")}
+              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all ${
+                activeSection === "live"
+                  ? "bg-gradient-to-r from-red-600 to-red-500 text-white shadow-lg shadow-red-500/30"
+                  : "bg-zinc-800/50 text-zinc-400 hover:bg-zinc-800 hover:text-white border border-zinc-700/50"
+              }`}
+            >
+              <Radio className="w-4 h-4" />
+              Live TV
             </button>
-            <button onClick={() => setActiveSection("movies")} className="hover:text-yellow-400">
-              <Film className="inline w-4 h-4 mr-1" /> Movies
+            <button
+              onClick={() => setActiveSection("movies")}
+              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all ${
+                activeSection === "movies"
+                  ? "bg-gradient-to-r from-red-600 to-red-500 text-white shadow-lg shadow-red-500/30"
+                  : "bg-zinc-800/50 text-zinc-400 hover:bg-zinc-800 hover:text-white border border-zinc-700/50"
+              }`}
+            >
+              <Server className="w-4 h-4" />
+              Media Servers
             </button>
-            <button onClick={() => setActiveSection("tools")} className="hover:text-yellow-400">
-              <Wrench className="inline w-4 h-4 mr-1" /> Tools
+            <button
+              onClick={() => setActiveSection("tools")}
+              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all ${
+                activeSection === "tools"
+                  ? "bg-gradient-to-r from-red-600 to-red-500 text-white shadow-lg shadow-red-500/30"
+                  : "bg-zinc-800/50 text-zinc-400 hover:bg-zinc-800 hover:text-white border border-zinc-700/50"
+              }`}
+            >
+              <Wrench className="w-4 h-4" />
+              Network Tools
             </button>
           </div>
         </div>
-      </nav>
+      </div>
 
-      {/* Fullscreen Modal */}
       {fullscreenUrl && (
         <div className="fixed inset-0 z-50 bg-black">
           <button
             onClick={() => setFullscreenUrl(null)}
-            className="fixed top-4 right-4 z-60 bg-yellow-500 text-black px-4 py-2 rounded-lg font-bold hover:bg-yellow-600"
+            className="fixed top-6 right-6 z-60 flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-xl font-semibold transition-all shadow-lg"
           >
+            <X className="w-5 h-5" />
             Exit Fullscreen
           </button>
           <iframe src={fullscreenUrl} className="w-full h-full" title="Fullscreen Content" allowFullScreen />
         </div>
       )}
 
-      {/* Main Content */}
-      <main className="p-6">
-        {/* Home Section */}
-        {activeSection === "home" && (
-          <section className="flex flex-col items-center space-y-6">
-            <h1 className="text-3xl font-bold mb-4">BDIX Server Menu</h1>
-            <div className="flex flex-col items-center space-y-4">
-              <div className="flex flex-wrap gap-4 mb-4">
-                <label className="flex items-center gap-2">
-                  <input type="radio" name="server-type" value="ftp" />
-                  Test only FTP Servers
-                </label>
-                <label className="flex items-center gap-2">
-                  <input type="radio" name="server-type" value="tv" />
-                  Test only TV Servers
-                </label>
-                <label className="flex items-center gap-2">
-                  <input type="radio" name="server-type" value="all" defaultChecked />
-                  Test All Servers
-                </label>
-              </div>
-              <div className="flex gap-4 mb-4">
-                <label className="flex items-center gap-2">
-                  <input type="checkbox" id="fast-mode" />
-                  Fast Mode
-                </label>
-              </div>
-              <button
-                onClick={handleTestServers}
-                className="w-40 h-40 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-2xl font-bold flex items-center justify-center transition-all"
-              >
-                Test Servers
-              </button>
-              <p className="text-center mt-4 max-w-2xl text-gray-300">
-                BDIX stands for "Bangladesh Internet Exchange". It provides Internet Service Providers (ISPs) with
-                Broadband ISP services, offering FTP (File Transfer Protocol) Server access for high-speed data
-                transfer.
-              </p>
-            </div>
-          </section>
-        )}
-
-        {/* Live TV Section */}
+      <main className="mx-auto max-w-7xl px-6 py-12">
         {activeSection === "live" && (
           <section>
-            <h1 className="text-3xl font-bold mb-6">Live TV</h1>
-            <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <div className="mb-8">
+              <h2 className="text-3xl font-bold mb-2">Live TV Channels</h2>
+              <p className="text-zinc-400">Watch live sports and entertainment</p>
+            </div>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {tvChannels.map((channel, index) => (
-                <div key={index} className="aspect-video bg-gray-900 rounded-2xl shadow-lg overflow-hidden relative">
-                  <iframe
-                    src={channel.url}
-                    className="w-full h-full"
-                    title={channel.name}
-                    allowFullScreen
-                    onClick={() => setFullscreenUrl(channel.url)}
-                  />
-                  <p className="absolute bottom-2 left-0 right-0 text-center bg-black/70 py-1">{channel.name}</p>
-                  <button
-                    onClick={() => setFullscreenUrl(channel.url)}
-                    className="absolute top-2 right-2 bg-red-600 text-white px-2 py-1 rounded text-xs hover:bg-red-700"
-                  >
-                    Fullscreen
-                  </button>
+                <div
+                  key={index}
+                  className="group relative aspect-video bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-2xl shadow-xl overflow-hidden border border-zinc-800/50 hover:border-red-500/50 transition-all"
+                >
+                  <iframe src={channel.url} className="w-full h-full" title={channel.name} allowFullScreen />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-2 group-hover:translate-y-0 transition-transform">
+                    <p className="font-semibold mb-2">{channel.name}</p>
+                    <button
+                      onClick={() => setFullscreenUrl(channel.url)}
+                      className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all"
+                    >
+                      <Maximize2 className="w-4 h-4" />
+                      Fullscreen
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
           </section>
         )}
 
-        {/* Movies Section */}
         {activeSection === "movies" && (
           <section>
-            <h1 className="text-3xl font-bold mb-6">FTP / Movie Servers</h1>
-            <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <div className="mb-8">
+              <h2 className="text-3xl font-bold mb-2">FTP & Media Servers</h2>
+              <p className="text-zinc-400">Browse movies, series, and entertainment content</p>
+            </div>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {movieServers.map((server, index) => (
-                <div key={index} className="aspect-video bg-gray-900 rounded-2xl shadow-lg overflow-hidden relative">
+                <div
+                  key={index}
+                  className="group relative aspect-video bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-2xl shadow-xl overflow-hidden border border-zinc-800/50 hover:border-red-500/50 transition-all"
+                >
                   <iframe src={server.url} className="w-full h-full" title={server.name} allowFullScreen />
-                  <p className="absolute bottom-2 left-0 right-0 text-center bg-black/70 py-1">{server.name}</p>
-                  <button
-                    onClick={() => setFullscreenUrl(server.url)}
-                    className="absolute top-2 right-2 bg-red-600 text-white px-2 py-1 rounded text-xs hover:bg-red-700"
-                  >
-                    Fullscreen
-                  </button>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-2 group-hover:translate-y-0 transition-transform">
+                    <p className="font-semibold mb-2">{server.name}</p>
+                    <button
+                      onClick={() => setFullscreenUrl(server.url)}
+                      className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all"
+                    >
+                      <Maximize2 className="w-4 h-4" />
+                      Fullscreen
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
           </section>
         )}
 
-        {/* Tools Section */}
         {activeSection === "tools" && (
-          <section className="flex flex-col items-center space-y-8">
-            <h1 className="text-3xl font-bold mb-6">Internet Tools</h1>
-
-            <div className="w-full max-w-2xl">
-              <h2 className="text-2xl font-semibold mb-4 text-center">Speed Test</h2>
-              <iframe
-                src="https://fast.com/"
-                className="w-full h-96 rounded-xl border border-gray-700"
-                title="Speed Test"
-              />
+          <section>
+            <div className="mb-8">
+              <h2 className="text-3xl font-bold mb-2">Network Tools</h2>
+              <p className="text-zinc-400">Test your connection and check network status</p>
             </div>
 
-            <div className="w-full max-w-md bg-gray-800/50 p-6 rounded-xl shadow-lg text-center">
-              <h2 className="text-2xl font-semibold mb-2">Your IP Address</h2>
-              <p className="text-yellow-400 font-bold text-xl">{ipAddress}</p>
+            <div className="grid gap-6 lg:grid-cols-2">
+              <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-2xl p-8 border border-zinc-800/50 shadow-xl">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center">
+                    <Wrench className="w-6 h-6 text-red-500" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold">Speed Test</h3>
+                    <p className="text-sm text-zinc-400">Measure your connection speed</p>
+                  </div>
+                </div>
+                <iframe
+                  src="https://fast.com/"
+                  className="w-full h-96 rounded-xl border border-zinc-800/50 bg-black"
+                  title="Speed Test"
+                />
+              </div>
+
+              <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-2xl p-8 border border-zinc-800/50 shadow-xl flex flex-col justify-center items-center text-center">
+                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center mb-6 shadow-lg shadow-red-500/30">
+                  <Server className="w-10 h-10 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold mb-2">Your IP Address</h3>
+                <p className="text-zinc-400 mb-6">Current network identifier</p>
+                <div className="bg-zinc-950 border border-zinc-800 rounded-xl px-8 py-4">
+                  <p className="text-3xl font-bold bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">
+                    {ipAddress}
+                  </p>
+                </div>
+              </div>
             </div>
-          </section>
-        )}
-
-        {/* About Section */}
-        {activeSection === "about" && (
-          <section className="max-w-4xl mx-auto">
-            <h1 className="text-3xl font-bold mb-6">About SK NETWORK</h1>
-            <p className="text-lg text-gray-300 leading-relaxed">
-              This portal provides access to various BDIX TV and movie servers, internet tools, and featured content. SK
-              NETWORK is dedicated to enhancing your streaming experience with high-speed connections and reliable
-              service.
-            </p>
-          </section>
-        )}
-
-        {/* Contact Section */}
-        {activeSection === "contact" && (
-          <section className="max-w-4xl mx-auto">
-            <h1 className="text-3xl font-bold mb-6">Contact Us</h1>
-            <p className="text-lg text-gray-300">Reach us at: support@sknetwork.com</p>
-          </section>
-        )}
-
-        {/* Portfolio Section */}
-        {activeSection === "portfolio" && (
-          <section className="max-w-4xl mx-auto">
-            <h1 className="text-3xl font-bold mb-6">Portfolio</h1>
-            <p className="text-lg text-gray-300">Check out our past projects and services.</p>
-          </section>
-        )}
-
-        {/* Services Section */}
-        {activeSection === "services" && (
-          <section className="max-w-4xl mx-auto">
-            <h1 className="text-3xl font-bold mb-6">Services</h1>
-            <p className="text-lg text-gray-300">Offering streaming solutions and internet tools for BDIX users.</p>
-          </section>
-        )}
-
-        {/* Blog Section */}
-        {activeSection === "blog" && (
-          <section className="max-w-4xl mx-auto">
-            <h1 className="text-3xl font-bold mb-6">Blog</h1>
-            <p className="text-lg text-gray-300">Stay updated with the latest news and tips.</p>
           </section>
         )}
       </main>
