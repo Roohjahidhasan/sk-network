@@ -2,13 +2,20 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { useState } from "react"
+import { useState, useTransition } from "react"
 import { Menu, X, Sun, Moon } from "lucide-react"
 import { useTheme } from "next-themes"
 
 export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { theme, setTheme } = useTheme()
+  const [isPending, startTransition] = useTransition()
+
+  const handleThemeToggle = () => {
+    startTransition(() => {
+      setTheme(theme === "dark" ? "light" : "dark")
+    })
+  }
 
   return (
     <nav className="fixed w-full z-50 backdrop-blur-xl bg-background/80 border-b border-border">
@@ -30,6 +37,9 @@ export function Navigation() {
           <Link href="/#coverage" className="hover:text-primary transition-colors">
             Coverage
           </Link>
+          <Link href="/setup" className="hover:text-primary transition-colors">
+            Get Connected
+          </Link>
           <Link href="/portal" className="hover:text-primary transition-colors">
             BDIX Portal
           </Link>
@@ -40,7 +50,7 @@ export function Navigation() {
 
         <div className="flex items-center gap-4">
           <button
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            onClick={handleThemeToggle}
             className="p-2 rounded-full hover:bg-accent transition-colors"
             aria-label="Toggle theme"
           >
@@ -84,6 +94,9 @@ export function Navigation() {
               onClick={() => setIsMenuOpen(false)}
             >
               Coverage
+            </Link>
+            <Link href="/setup" className="hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
+              Get Connected
             </Link>
             <Link href="/portal" className="hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
               BDIX Portal

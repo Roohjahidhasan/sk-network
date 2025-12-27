@@ -58,7 +58,7 @@ export function Footer() {
             <Link href="#contact" className="text-gray-400 text-sm hover:text-red-500 hover:pl-1 transition-all">
               Help Center
             </Link>
-            <Link href="#packages" className="text-gray-400 text-sm hover:text-red-500 hover:pl-1 transition-all">
+            <Link href="/setup" className="text-gray-400 text-sm hover:text-red-500 hover:pl-1 transition-all">
               Connection Request
             </Link>
             <Link href="#contact" className="text-gray-400 text-sm hover:text-red-500 hover:pl-1 transition-all">
