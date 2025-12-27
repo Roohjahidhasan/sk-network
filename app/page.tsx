@@ -1,5 +1,6 @@
 import { Hero } from "@/components/hero"
 import { Features } from "@/components/features"
+import { Coverage } from "@/components/coverage"
 import { Packages } from "@/components/packages"
 import { SpeedTest } from "@/components/speed-test"
 import { Contact } from "@/components/contact"
@@ -12,6 +13,7 @@ export default function HomePage() {
       <Navigation />
       <Hero />
       <Features />
+      <Coverage />
       <Packages />
       <SpeedTest />
       <Contact />

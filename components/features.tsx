@@ -1,39 +1,58 @@
-import { Gamepad2, Tv, Headset, Cpu } from "lucide-react"
+import { Wifi, Zap, Shield, Headset, Globe, Server, Tv, Clock } from "lucide-react"
 
 export function Features() {
   const features = [
     {
-      icon: Gamepad2,
-      title: "Gaming Optimized",
-      description: "Direct peering with Steam, Valorant, and PUBG servers for <20ms pings.",
+      icon: Wifi,
+      title: "Fiber Optic Network",
+      description: "100% fiber optic GPON infrastructure delivering consistent speeds with no bandwidth throttling.",
     },
     {
-      icon: Tv,
+      icon: Zap,
+      title: "Ultra-Fast Speeds",
+      description: "Up to 1Gbps download speeds perfect for 4K streaming, gaming, and large file transfers.",
+    },
+    {
+      icon: Globe,
+      title: "BDIX Connectivity",
+      description: "Direct peering with BDIX servers for local content, FTP access, and super-fast local downloads.",
+    },
+    {
+      icon: Server,
       title: "Manu Media Server",
-      description:
-        "Access our high-speed local media cache server featuring thousands of movies, TV series, and entertainment content available instantly.",
+      description: "Access 2,500+ movies and series instantly through our high-speed local media cache server.",
+    },
+    {
+      icon: Shield,
+      title: "99.9% Uptime",
+      description: "Enterprise-grade reliability with redundant connections and automatic failover systems.",
     },
     {
       icon: Headset,
-      title: "Instant Support",
-      description: "Our on-site engineering team is available 24/7 to solve connection issues.",
+      title: "24/7 Support",
+      description: "Local technical support team available round the clock to resolve any connectivity issues.",
     },
     {
-      icon: Cpu,
-      title: "GPON Tech",
-      description: "Gigabit Passive Optical Network ensures you get the exact speed you pay for.",
+      icon: Tv,
+      title: "IPTV & Streaming",
+      description: "Optimized for streaming services like Netflix, YouTube, and local IPTV channels without buffering.",
+    },
+    {
+      icon: Clock,
+      title: "Quick Installation",
+      description: "Professional installation within 24-48 hours of order confirmation with no hidden charges.",
     },
   ]
 
   return (
-    <section id="about" className="py-24 px-6 bg-white/5">
+    <section id="services" className="py-24 px-6 bg-accent/5">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <h2 className="text-4xl font-bold mb-6">
-            Built for the <span className="text-red-500">Digital Future</span>
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <h2 className="text-4xl md:text-5xl font-black mb-4 text-balance">
+            Why Choose <span className="text-primary">SK NETWORK</span>
           </h2>
-          <p className="text-gray-400">
-            We don't just sell internet; we provide a high-capacity backbone for your digital lifestyle.
+          <p className="text-muted-foreground text-lg text-pretty">
+            Premium broadband internet service with cutting-edge technology and exceptional customer support
           </p>
         </div>
 
@@ -43,11 +62,13 @@ export function Features() {
             return (
               <div
                 key={feature.title}
-                className="bg-white/[0.03] border border-white/5 p-10 rounded-3xl text-center hover:border-red-500 hover:-translate-y-1 transition-all duration-300"
+                className="group bg-card border border-border p-6 rounded-2xl hover:border-primary hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1"
               >
-                <Icon className="w-10 h-10 text-red-500 mx-auto mb-6" />
-                <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
-                <p className="text-gray-500 text-sm">{feature.description}</p>
+                <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                  <Icon className="w-7 h-7 text-primary group-hover:text-primary-foreground transition-colors" />
+                </div>
+                <h3 className="text-lg font-bold mb-2">{feature.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{feature.description}</p>
               </div>
             )
           })}

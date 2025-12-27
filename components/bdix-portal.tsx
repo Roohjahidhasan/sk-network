@@ -1,9 +1,9 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { Wrench, Maximize2, X, Radio, Server } from "lucide-react"
+import { useState, useEffect, useRef } from "react"
+import { Wrench, Maximize2, X, Radio, Server, Film, Gauge, Globe, Activity, Monitor, Wifi } from "lucide-react"
 
-type Section = "live" | "movies" | "tools"
+type Section = "live" | "movies" | "manu" | "tools"
 
 const tvChannels = [
   { name: "TSports", url: "http://moviemazic.xyz/live-tv/tsports.html", type: "external" },
@@ -29,10 +29,18 @@ const movieServers = [
   { name: "Takdhum", url: "http://www.takdhum.net:8096/web/index.html#!/home.html", type: "external" },
 ]
 
+const manuMediaContent = [
+  { title: "Latest Movies", count: "2,500+", category: "Hollywood & Bollywood" },
+  { title: "Web Series", count: "850+", category: "Netflix, Prime, Disney+" },
+  { title: "TV Shows", count: "1,200+", category: "Popular Series" },
+  { title: "Anime Collection", count: "450+", category: "Subbed & Dubbed" },
+]
+
 export function BdixPortal() {
   const [activeSection, setActiveSection] = useState<Section>("live")
   const [ipAddress, setIpAddress] = useState("Loading...")
   const [fullscreenUrl, setFullscreenUrl] = useState<string | null>(null)
+  const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
     fetch("https://api.ipify.org?format=json")
@@ -41,13 +49,67 @@ export function BdixPortal() {
       .catch(() => setIpAddress("Failed to load IP"))
   }, [])
 
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    const ctx = canvas.getContext("2d")
+    if (!ctx) return
+
+    canvas.width = window.innerWidth
+    canvas.height = window.innerHeight
+
+    const particles: Array<{ x: number; y: number; vx: number; vy: number; size: number }> = []
+    for (let i = 0; i < 50; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        size: Math.random() * 2 + 1,
+      })
+    }
+
+    function animate() {
+      if (!ctx || !canvas) return
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+      particles.forEach((p) => {
+        p.x += p.vx
+        p.y += p.vy
+
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1
+
+        ctx.beginPath()
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2)
+        ctx.fillStyle = "rgba(239, 68, 68, 0.3)"
+        ctx.fill()
+      })
+
+      requestAnimationFrame(animate)
+    }
+
+    animate()
+
+    const handleResize = () => {
+      canvas.width = window.innerWidth
+      canvas.height = window.innerHeight
+    }
+
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950 text-white">
-      <div className="border-b border-white/10 bg-black/40 backdrop-blur-xl sticky top-0 z-40">
+    <div className="relative min-h-screen bg-gradient-to-br from-zinc-950 via-zinc-900 to-black text-white overflow-hidden">
+      <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none opacity-30" />
+
+      <div className="relative z-10 border-b border-white/10 bg-black/40 backdrop-blur-xl sticky top-0 z-40">
         <div className="mx-auto max-w-7xl px-6 py-6">
           <div className="flex items-center justify-between mb-8">
             <div>
-              <h1 className="text-4xl font-bold bg-gradient-to-r from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent">
+              <h1 className="text-4xl font-bold bg-gradient-to-r from-white via-red-100 to-red-400 bg-clip-text text-transparent">
                 BDIX Portal
               </h1>
               <p className="text-zinc-400 mt-1">Access streaming content and network tools</p>
@@ -58,7 +120,7 @@ export function BdixPortal() {
             </div>
           </div>
 
-          <div className="flex gap-3">
+          <div className="flex gap-3 flex-wrap">
             <button
               onClick={() => setActiveSection("live")}
               className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all ${
@@ -79,7 +141,18 @@ export function BdixPortal() {
               }`}
             >
               <Server className="w-4 h-4" />
-              Media Servers
+              FTP Servers
+            </button>
+            <button
+              onClick={() => setActiveSection("manu")}
+              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all ${
+                activeSection === "manu"
+                  ? "bg-gradient-to-r from-red-600 to-red-500 text-white shadow-lg shadow-red-500/30"
+                  : "bg-zinc-800/50 text-zinc-400 hover:bg-zinc-800 hover:text-white border border-zinc-700/50"
+              }`}
+            >
+              <Film className="w-4 h-4" />
+              Manu Media Server
             </button>
             <button
               onClick={() => setActiveSection("tools")}
@@ -109,7 +182,7 @@ export function BdixPortal() {
         </div>
       )}
 
-      <main className="mx-auto max-w-7xl px-6 py-12">
+      <main className="relative z-10 mx-auto max-w-7xl px-6 py-12">
         {activeSection === "live" && (
           <section>
             <div className="mb-8">
@@ -170,18 +243,70 @@ export function BdixPortal() {
           </section>
         )}
 
+        {activeSection === "manu" && (
+          <section>
+            <div className="mb-8">
+              <h2 className="text-3xl font-bold mb-2">Manu Media Server</h2>
+              <p className="text-zinc-400">Instant access to thousands of movies, series, and entertainment</p>
+            </div>
+
+            <div className="grid gap-6 lg:grid-cols-2 mb-8">
+              {manuMediaContent.map((item, index) => (
+                <div
+                  key={index}
+                  className="group bg-gradient-to-br from-zinc-900/80 to-zinc-950/80 backdrop-blur-sm rounded-2xl p-8 border border-zinc-800/50 hover:border-red-500/50 transition-all shadow-xl hover:shadow-2xl hover:shadow-red-500/10"
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <div>
+                      <h3 className="text-2xl font-bold mb-1">{item.title}</h3>
+                      <p className="text-zinc-400 text-sm">{item.category}</p>
+                    </div>
+                    <div className="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center group-hover:bg-red-500/20 transition-colors">
+                      <Film className="w-6 h-6 text-red-500" />
+                    </div>
+                  </div>
+                  <div className="mt-6">
+                    <p className="text-4xl font-bold bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">
+                      {item.count}
+                    </p>
+                    <p className="text-zinc-500 text-sm mt-1">Available titles</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="bg-gradient-to-br from-zinc-900/80 to-zinc-950/80 backdrop-blur-sm rounded-2xl p-8 border border-zinc-800/50 shadow-xl">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center">
+                  <Monitor className="w-6 h-6 text-red-500" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold">Access Manu Media Server</h3>
+                  <p className="text-sm text-zinc-400">Browse our extensive media library</p>
+                </div>
+              </div>
+              <iframe
+                src="http://192.168.1.100:8096"
+                className="w-full h-[600px] rounded-xl border border-zinc-800/50 bg-black"
+                title="Manu Media Server"
+                allowFullScreen
+              />
+            </div>
+          </section>
+        )}
+
         {activeSection === "tools" && (
           <section>
             <div className="mb-8">
               <h2 className="text-3xl font-bold mb-2">Network Tools</h2>
-              <p className="text-zinc-400">Test your connection and check network status</p>
+              <p className="text-zinc-400">Test your connection and diagnose network issues</p>
             </div>
 
-            <div className="grid gap-6 lg:grid-cols-2">
-              <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-2xl p-8 border border-zinc-800/50 shadow-xl">
+            <div className="grid gap-6 lg:grid-cols-2 mb-6">
+              <div className="bg-gradient-to-br from-zinc-900/80 to-zinc-950/80 backdrop-blur-sm rounded-2xl p-8 border border-zinc-800/50 hover:border-red-500/50 transition-all shadow-xl">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center">
-                    <Wrench className="w-6 h-6 text-red-500" />
+                    <Gauge className="w-6 h-6 text-red-500" />
                   </div>
                   <div>
                     <h3 className="text-xl font-bold">Speed Test</h3>
@@ -195,9 +320,9 @@ export function BdixPortal() {
                 />
               </div>
 
-              <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-2xl p-8 border border-zinc-800/50 shadow-xl flex flex-col justify-center items-center text-center">
+              <div className="bg-gradient-to-br from-zinc-900/80 to-zinc-950/80 backdrop-blur-sm rounded-2xl p-8 border border-zinc-800/50 hover:border-red-500/50 transition-all shadow-xl flex flex-col justify-center items-center text-center">
                 <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center mb-6 shadow-lg shadow-red-500/30">
-                  <Server className="w-10 h-10 text-white" />
+                  <Globe className="w-10 h-10 text-white" />
                 </div>
                 <h3 className="text-2xl font-bold mb-2">Your IP Address</h3>
                 <p className="text-zinc-400 mb-6">Current network identifier</p>
@@ -206,6 +331,41 @@ export function BdixPortal() {
                     {ipAddress}
                   </p>
                 </div>
+              </div>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <div className="bg-gradient-to-br from-zinc-900/80 to-zinc-950/80 backdrop-blur-sm rounded-2xl p-6 border border-zinc-800/50 hover:border-red-500/50 transition-all shadow-xl">
+                <div className="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center mb-4">
+                  <Activity className="w-6 h-6 text-red-500" />
+                </div>
+                <h3 className="text-lg font-bold mb-2">Ping Test</h3>
+                <p className="text-zinc-400 text-sm mb-4">Check server response time</p>
+                <button className="w-full bg-zinc-800 hover:bg-zinc-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all">
+                  Run Test
+                </button>
+              </div>
+
+              <div className="bg-gradient-to-br from-zinc-900/80 to-zinc-950/80 backdrop-blur-sm rounded-2xl p-6 border border-zinc-800/50 hover:border-red-500/50 transition-all shadow-xl">
+                <div className="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center mb-4">
+                  <Wifi className="w-6 h-6 text-red-500" />
+                </div>
+                <h3 className="text-lg font-bold mb-2">DNS Lookup</h3>
+                <p className="text-zinc-400 text-sm mb-4">Resolve domain names</p>
+                <button className="w-full bg-zinc-800 hover:bg-zinc-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all">
+                  Check DNS
+                </button>
+              </div>
+
+              <div className="bg-gradient-to-br from-zinc-900/80 to-zinc-950/80 backdrop-blur-sm rounded-2xl p-6 border border-zinc-800/50 hover:border-red-500/50 transition-all shadow-xl">
+                <div className="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center mb-4">
+                  <Monitor className="w-6 h-6 text-red-500" />
+                </div>
+                <h3 className="text-lg font-bold mb-2">Bandwidth Monitor</h3>
+                <p className="text-zinc-400 text-sm mb-4">Track usage in real-time</p>
+                <button className="w-full bg-zinc-800 hover:bg-zinc-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all">
+                  Monitor
+                </button>
               </div>
             </div>
           </section>
