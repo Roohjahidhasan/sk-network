@@ -90,7 +90,7 @@ export function Contact() {
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-red-500 transition"
-                placeholder="Md Jahid"
+                placeholder="Md Jahid Hasan"
               />
             </div>
 
