@@ -32,7 +32,7 @@ import { MediaPlayer } from "@/components/media-player"
 type Section = "live" | "movies" | "manu" | "tools"
 
 const tvChannels = [
-  { name: "TSports", url: "http://moviemazic.xyz/live-tv/tsports.html", type: "external" },
+  { name: "Roarzone", url: "https://tv.roarzone.info/", type: "external" },
   { name: "Cityplex Live", url: "http://live.cityplex.live/", type: "external" },
   { name: "Channel 1", url: "http://172.16.29.28/", type: "local" },
   { name: "Gazi TV", url: "http://moviemazic.xyz/live-tv/gazi-tv.html", type: "external" },
