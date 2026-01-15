@@ -1,0 +1,721 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>FREE Live TV !!! </title> 
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&amp;subset=latin-ext" rel="stylesheet"/>
+
+
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <!--FontAwesome nin css -->
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+    <!--Owl carousel css-->
+    <link rel="stylesheet" href="assets/css/owl.carousel.css" />
+    <!-- <link rel="stylesheet" href="flowplayer/skin/skin.css"> -->
+    <!--Style css-->
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" media="screen" href="css/noyan.css">
+
+
+    <!--[if lt IE 9]>
+      <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+        <link rel="stylesheet" href="https://releases.flowplayer.org/7.2.7/skin/skin.css">
+        <!-- hls.js -->
+        <!-- flowplayer -->
+        <script src="https://cdn.jsdelivr.net/npm/hls.js@0.11.0/dist/hls.min.js"></script>
+        <script src="flowplayer.min.js"></script>
+        <!--jquery-1.11.2.min.js-->
+        <script src="jquery-1.11.2.min.js"></script> 
+
+
+<script src="https://cdn.flowplayer.com/releases/native/latest/flowplayer.min.js"></script>
+  </head>
+
+
+  <body class="demo2" oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
+
+
+
+                <center>
+                <div class="ifream">
+                        <div id="player" class="flowplayer fp-mute">
+
+
+                                <script>
+                                                flowplayer('#player', {
+                                                        live: true,  // set if it's a livestream
+                                                        ratio: 9/16, // set the aspect ratio of the stream
+                                                        autoplay: true,
+                                                        mutedAutoplay: false,
+                                                        share: false,
+                                                        clip: {
+                                                                sources: [
+                                                                        // path to the HLS m3u8
+                                                                           { 
+                                                                            type: "application/x-mpegurl", 
+                                                                            src: "http://172.16.29.3:8090/hls/somoytv.m3u8"
+
+                                                                           },
+                                                                        ]
+                                                          }
+
+                                                     });
+                                </script>
+
+
+
+
+                        </div>
+                        <center>
+                                <p></p>
+                       </center>
+
+
+
+
+
+
+
+        <!--marquee><p><b><span>News Free TV</span> <font color="yellow"> FREE TV</font></b></p></marquee-->
+
+
+<hr>
+
+    <div class="owl-filter">
+      <div class="container-fluid custom_fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <!--font color="#eef1de" size="4px"> <b>TV CHANNELS</b> </font-->
+            <div class="filter-menu">
+              <ul>
+                <li class="filter-btn btn-active" data-filter="*">
+                  All Channel
+                </li>
+                    <li class="filter-btn" data-filter=".news">News</li>
+                    <li class="filter-btn" data-filter=".bangla">Bangla</li>
+                    <li class="filter-btn" data-filter=".inbangla">Indian Bangla</li>
+                    <li class="filter-btn" data-filter=".hindi">Indian Hindi</li>
+                    <li class="filter-btn" data-filter=".sports">Sports</li>
+                    <li class="filter-btn" data-filter=".kids">Cartoon</li>
+                    <li class="filter-btn" data-filter=".documentary">Documentary</li>
+                    <li class="filter-btn" data-filter=".english">English</li>
+                    <li class="filter-btn" data-filter=".music">Music</li>
+                    
+              </ul>
+            </div>
+          <div class="filter-item">
+
+              <!-- ======== News Channels ========= -->      
+<!--
+           <div class="item news">
+              <div class="item_content">
+                <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/GEONews.m3u8')">
+                    <img src="assets/images/dbcnews.jpg" class="img-responsive"/></a>
+              </div>
+           </div>
+-->
+           <div class="item news">
+              <div class="item_content">
+                <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/CGTN_NEWS.m3u8')">
+                    <img src="assets/images/dwnews.png" class="img-responsive"/></a>
+              </div>
+           </div>
+
+           <div class="item news">
+              <div class="item_content">
+                <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/ALjazeeraNews.m3u8')">
+                    <img src="assets/images/aljazeranews.png" class="img-responsive"/></a>
+              </div>
+            </div>
+
+           <div class="item news">
+              <div class="item_content">
+                <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/bbc_world.m3u8')">
+                    <img src="assets/images/bbcworldnews.png" class="img-responsive"/></a>
+              </div>
+           </div>
+
+           <div class="item news">
+              <div class="item_content">
+                <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/AtnNews.m3u8')">
+                    <img src="assets/images/atnnews.jpg" class="img-responsive"/></a>
+              </div>
+           </div>
+                  
+            <!-- ====== Bangla Channels ====  -->
+
+              <div class="item bangla">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/JamunaTV.m3u8')">
+                      <img src="assets/images/jamunatv.jpg" class="img-responsive"/></a>
+                </div>
+              </div>
+
+             <div class="item bangla">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/somoytv.m3u8')">
+                      <img src="assets/images/somoytv.jpg" class="img-responsive"/></a>
+                </div>
+             </div>
+
+             <div class="item bangla">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/channelihd.m3u8')">
+                      <img src="assets/images/channelihd.jpg" class="img-responsive"/></a>
+                </div>
+             </div>
+
+             <div class="item bangla">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/gazitvhd.m3u8')">
+                      <img src="assets/images/gtv.png" class="img-responsive"/></a>
+                </div>
+             </div>
+
+             <div class="item bangla">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/BTVNationalHD.m3u8')">
+                      <img src="assets/images/BTV.png" class="img-responsive"/></a>
+                </div>
+             </div>
+
+             <div class="item bangla">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/IndependentTV.m3u8')">
+                      <img src="assets/images/independent.png" class="img-responsive"/></a>
+                </div>
+             </div>
+
+
+
+              <!-- ====== Indian Bangla Channels ====  -->
+
+              <div class="item inbangla">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/ZeeBanglaCinemaHD.m3u8')">
+                      <img src="assets/images/zeebanglacinema.png" class="img-responsive"/></a>
+                </div>
+             </div>
+<!--
+              <div class="item inbangla">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/ZeeBanglaHD.m3u8')">
+                      <img src="assets/images/zeebangla.png" class="img-responsive"/></a>
+                </div>
+             </div>             
+
+             <div class="item inbangla">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/ColorsBanglaHD.m3u8')">
+                      <img src="assets/images/colorsbangla.png" class="img-responsive"/></a>
+                </div>
+             </div>
+-->
+             <div class="item inbangla">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/StarJalshaHD.m3u8')">
+                      <img src="assets/images/starjalsha.png" class="img-responsive"/></a>
+                </div>
+             </div>
+
+             <div class="item inbangla">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/SonyAtth.m3u8')">
+                      <img src="assets/images/sonyaath.png" class="img-responsive"/></a>
+                </div>
+             </div>
+            
+             <div class="item inbangla">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/Enter10Bangla.m3u8')">
+                      <img src="assets/images/enterbangla.png" class="img-responsive"/></a>
+                </div>
+             </div>
+
+            
+             <div class="item inbangla">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/JalshaMoviesHD.m3u8')">
+                      <img src="assets/images/jalshamovies.png" class="img-responsive"/></a>
+                </div>
+             </div>
+
+<!--             
+             <div class="item inbangla">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/sbharathd.m3u8')">
+                      <img src="assets/images/********.png" class="img-responsive"/></a>
+                </div>
+             </div>
+
+-->           
+
+
+              <!-- =========== item indian Hindi ========= -->
+
+
+              <div class="item hindi">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/ZeeTVHD.m3u8')">
+                      <img src="assets/images/zeetv.png" class="img-responsive"/></a>
+                </div>
+              </div>
+
+              <div class="item hindi">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/sonymaxhd.m3u8')">
+                      <img src="assets/images/sonymax.png" class="img-responsive"/></a>
+                </div>
+              </div>
+
+              <div class="item hindi">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/StarGoldHD.m3u8')">
+                      <img src="assets/images/stargoldhd.png" class="img-responsive"/></a>
+                </div>
+              </div>
+
+              <div class="item hindi">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/StarGold2HD.m3u8')">
+                      <img src="assets/images/stargoldhd.png" class="img-responsive"/></a>
+                </div>
+              </div>              
+<!--
+              <div class="item hindi">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/ColorsHD.m3u8')">
+                      <img src="assets/images/colors.png" class="img-responsive"/></a>
+                </div>
+              </div>
+-->
+              <div class="item hindi">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/MtvIndiaHD.m3u8')">
+                      <img src="assets/images/zoomtv.png" class="img-responsive"/></a>
+                </div>
+              </div>
+              
+              <div class="item hindi">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/SonyHD.m3u8')">
+                      <img src="assets/images/sony.png" class="img-responsive"/></a>
+                </div>
+              </div> 
+<!--              
+              <div class="item hindi">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/ColorsCineplexHD.m3u8')">
+                      <img src="assets/images/colorscineplex.png" class="img-responsive"/></a>
+                </div>
+              </div> 
+-->
+              <div class="item hindi">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/StarPlusHD.m3u8')">
+                      <img src="assets/images/starplus.png" class="img-responsive"/></a>
+                </div>
+              </div> 
+
+
+              <!-- ========== Sports Channels =========== -->
+
+              <div class="item sports">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/tsportshd.m3u8')">
+                      <img src="assets/images/TSports.jpg" class="img-responsive"/></a>
+                </div>
+              </div>
+              
+              <div class="item sports">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/ptvsportshd.m3u8')">
+                      <img src="assets/images/ptvsports.png" class="img-responsive"/></a>
+                </div>
+              </div>
+             
+              <div class="item sports">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/SonyTen1hd.m3u8')">
+                      <img src="assets/images/sony-ten-1.png" class="img-responsive"/></a>
+                </div>
+              </div>
+
+              <div class="item sports">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/SonyTen2hd.m3u8')">
+                      <img src="assets/images/sony-ten-2.png" class="img-responsive"/></a>
+                </div>
+              </div>
+
+              <div class="item sports">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/SonyTen3hd.m3u8')">
+                      <img src="assets/images/sony-ten-3.png" class="img-responsive"/></a>
+                </div>
+              </div>              
+
+              <div class="item sports">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/SonyTen5HD.m3u8')">
+                      <img src="assets/images/sonyten5.png" class="img-responsive"/></a>
+                </div>
+              </div>
+
+              <div class="item sports">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/StarSports2HD.m3u8')">
+                      <img src="assets/images/starsports1.png" class="img-responsive"/></a>
+                </div>
+              </div>
+              
+              <div class="item sports">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/StarSportsHindi2HD.m3u8')">
+                      <img src="assets/images/starsports1.png" class="img-responsive"/></a>
+                </div>
+              </div>
+
+              <div class="item sports">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/StarSportsSelect1HD.m3u8')">
+                      <img src="assets/images/starsportsselect1.png" class="img-responsive"/></a>
+                </div>
+              </div>
+
+
+              <div class="item sports">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/StarSportsSelect2HD.m3u8')">
+                      <img src="assets/images/sports18-1.png" class="img-responsive"/></a>
+                </div>
+              </div>
+
+              <div class="item sports">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/tntsports2hd.m3u8')">
+                      <img src="assets/images/tntsports.png" class="img-responsive"/></a>
+                </div>
+              </div>
+             
+              <div class="item sports">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/StarSports1HD.m3u8')">
+                      <img src="assets/images/starsports1.png" class="img-responsive"/></a>
+                </div>
+              </div>
+              
+  
+              <div class="item sports">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/tensportshd.m3u8')">
+                      <img src="assets/images/tensports.png" class="img-responsive"/></a>
+                </div>
+              </div>
+                                      
+              <div class="item sports">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/BeinSports1ENG.m3u8')">
+                      <img src="assets/images/bein3.png" class="img-responsive"/></a>
+                </div>
+              </div>
+            
+              <div class="item sports">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/eurosportshd.m3u8')">
+                      <img src="assets/images/eurosport.png" class="img-responsive"/></a>
+                </div>
+              </div>
+             
+              <div class="item sports">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/tntsports1hd.m3u8')">
+                      <img src="assets/images/tntsports.png" class="img-responsive"/></a>
+                </div>
+              </div>
+              
+              <div class="item sports">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/tntsports2hd.m3u8')">
+                      <img src="assets/images/tntsports.png" class="img-responsive"/></a>
+                </div>
+              </div>
+
+              <div class="item sports">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/tntsports3hd.m3u8')">
+                      <img src="assets/images/tntsports.png" class="img-responsive"/></a>
+                </div>
+              </div>
+
+              <div class="item sports">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/tntsports4hd.m3u8')">
+                      <img src="assets/images/tntsports.png" class="img-responsive"/></a>
+                </div>
+              </div>
+              
+              
+              <div class="item sports">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/tsportshd_feed2.m3u8')">
+                      <img src="assets/images/TSports.jpg" class="img-responsive"/></a>
+                </div>
+              </div>
+                           
+              <div class="item sports">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/SkySportsGOLF.m3u8')">
+                      <img src="assets/images/skysportsgolfhd.png" class="img-responsive"/></a>
+                </div>
+              </div>
+          
+              <div class="item sports">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/SSCSports1HD.m3u8')">
+                      <img src="assets/images/starsportsselect2.png" class="img-responsive"/></a>
+                </div>
+              </div>
+
+ 
+              <div class="item sports">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/SkySportsCricketHD.m3u8')">
+                      <img src="assets/images/skysportsgolfhd.png" class="img-responsive"/></a>
+                </div>
+              </div>
+              
+
+              <div class="item sports">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/ASportsHD.m3u8')">
+                      <img src="assets/images/asportse.png" class="img-responsive"/></a>
+                </div>
+              </div>
+
+              <div class="item sports">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/willowcrickethd.m3u8')">
+                      <img src="assets/images/willow.png" class="img-responsive"/></a>
+                </div>
+              </div>
+
+              <div class="item sports">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/WillowCricket2HD.m3u8')">
+                      <img src="assets/images/willow.png" class="img-responsive"/></a>
+                </div>
+              </div>              
+              
+              <!-- ======== Kids Channels ========== -->
+<!--              <div class="item kids">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/nicktvhdplus.m3u8')">
+                      <img src="assets/images/nicktv.png" class="img-responsive"/></a>
+                </div>
+              </div>
+-->
+              <div class="item kids">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/CartoonNetworkHD.m3u8')">
+                      <img src="assets/images/cnhd.png" class="img-responsive"/></a>
+                </div>
+              </div>                          
+              <div class="item kids">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/DiscoveryKids.m3u8')">
+                      <img src="assets/images/dicoveryKid.png" class="img-responsive"/></a>
+                </div>
+              </div> 
+<!--
+              <div class="item kids">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/pogo.m3u8')">
+                      <img src="assets/images/pogo.png" class="img-responsive"/></a>
+                </div>
+              </div> 
+
+              <div class="item kids">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/DisneyIntHD.m3u8')">
+                      <img src="assets/images/durontotv.jpg" class="img-responsive"/></a>
+                </div>
+           </div> 
+-->
+              <!-- ======== Documentory Channels ========== -->
+
+              <div class="item documentary">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/DiscoveryHD.m3u8')">
+                      <img src="assets/images/discoveryhd.png" class="img-responsive"/></a>
+                </div>
+              </div>
+<!--
+              <div class="item documentary">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/NatGeoWild.m3u8')">
+                      <img src="assets/images/natgeo.png" class="img-responsive"/></a>
+                </div>
+              </div>
+
+              <div class="item documentary">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/AnimalPlanetHD.m3u8')">
+                      <img src="assets/images/animalplanet.png" class="img-responsive"/></a>
+                </div>
+              </div>   
+-->
+              <div class="item documentary">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/NetGeoHD.m3u8')">
+                      <img src="assets/images/natgeo.png" class="img-responsive"/></a>
+                </div>
+              </div>     
+              
+              <div class="item documentary">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/bbcearthhd.m3u8')">
+                      <img src="assets/images/natgeo.png" class="img-responsive"/></a>
+                </div>
+              </div>  
+
+              
+              
+
+              <!-- ======== English Channels ========= -->
+<!--
+              <div class="item english">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/ColorsInfinityHD.m3u8')">
+                      <img src="assets/images/colors.png" class="img-responsive"/></a>
+                </div>
+              </div>
+-->
+              <div class="item english">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/AndPictureHD.m3u8')">
+                      <img src="assets/images/andpic.png" class="img-responsive"/></a>
+                </div>
+              </div>
+
+              <div class="item english">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/AndPriveHD.m3u8')">
+                      <img src="assets/images/andtv.png" class="img-responsive"/></a>
+                </div>
+              </div>
+<!--
+              <div class="item english">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/ARYDigital.m3u8')">
+                      <img src="assets/images/Ary.png" class="img-responsive"/></a>
+                </div>
+              </div>
+
+
+              <div class="item english">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/StarLifeHD.m3u8')">
+                      <img src="assets/images/Starlife.png" class="img-responsive"/></a>
+                </div>
+              </div>
+-->
+              <div class="item english">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/AndFlixHD.m3u8')">
+                      <img src="assets/images/andflix.png" class="img-responsive"/></a>
+                </div>
+              </div>
+<!--
+              <div class="item english">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/sonypixhd.m3u8')">
+                      <img src="assets/images/sonypix.png" class="img-responsive"/></a>
+                </div>
+              </div> 
+-->
+              <div class="item english">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/ZeeCinemaHD.m3u8')">
+                      <img src="assets/images/mn+.png" class="img-responsive"/></a>
+                </div>
+              </div>
+
+              <div class="item english">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/StarMoviesHD.m3u8')">
+                      <img src="assets/images/star-movies-hd.jpg" class="img-responsive"/></a>
+                </div>
+              </div>  
+              
+            
+              <!-- ======== Music Channels ========== -->
+
+              <div class="item music">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/mastii.m3u8')">
+                      <img src="assets/images/63masti.png" class="img-responsive"/></a>
+                </div>
+              </div>
+
+              <div class="item music">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/9xm.m3u8')">
+                      <img src="assets/images/9xm.png" class="img-responsive"/></a>
+                </div>
+              </div>              
+
+              <div class="item music">
+                <div class="item_content">
+                  <a href="javascript:void(0)" onclick="flowplayer(0).load('http://172.16.29.3:8090/hls/SangeetBangla.m3u8')">
+                      <img src="assets/images/sangeetbangla.png" class="img-responsive"/></a>
+                </div>
+              </div>
+      
+              <!--======   End =====  -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <p>
+              &copy; Copyright 2024 &nbsp; FREE TV . &nbsp; All Rights Reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+
+        <div id="particles-js"><canvas class="particles-js-canvas-el" width="1365" height="920" style="width: 100%; height: 100%;"></canvas></div>
+<script src="js/noyan.js"></script>
+<script src="js/noyan1.js"></script>
+
+    <!--Bootstrap min js-->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!--Owl filter js-->
+    <script src="assets/js/jquery.owl-filter.js"></script>
+    <!--Owl carousel min js-->
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <!--Main js-->
+    <script src="assets/js/main.js"></script>
+
+</script>
+  </body>
+</html>
