@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut icon" href="sk.jpeg" type="images/sk.jpeg">
+	<title>Sk Media Servers</title>
+	<link rel="stylesheet" href="Style.css">
+</head>
+<body style="background-image: url(sknet.png); background-position: center center; background-size: cover;">
+
+                  <div class="onoffswitch3" style="background:red">
+            <input type="checkbox" name="onoffswitch3" class="onoffswitch3-checkbox" id="myonoffswitch3" checked>
+            <label class="onoffswitch3-label" for="myonoffswitch3">
+               <span class="onoffswitch3-inner">
+                  <span class="onoffswitch3-active">
+                     <marquee class="scroll-text" onmouseover="this.stop();" onmouseout="this.start();">
+                                               <span class="fa fa-forward"></span>
+                        <a href="" style="color: white;">
+                          
+							নোটিশ: সম্মানিত গ্রাহক আপনার ইন্টারনেট বিল প্রতি মাসে ০১ থেকে ১০ তারিখের মধ্যে পরিশোধ করুন অন্যথায় আপনার সংযোগ সক্রিয়ভাবে বন্ধ হয়ে যাবে ধন্যবাদ  এস.কে নেটওয়ার্ক
+                       
+                     </marquee>
+                  </span>
+               </span>
+            </label>
+         </div>
+<!-- -------------------------------------- -->
+<div class="container" style="margin-bottom:70px;">
+	<div class="row" style="margin-top:80px">
+
+
+  		<div class="col-md-3 mb-3 col-sm-6 " style="margin-right:100px">
+			<a href="/Media/tv/tvindex.html"  style="text-decoration: none;"  >
+
+	            <img src="TVm.jpg" style="height: 200px;width: 300px;" alt="Tv-Servers">
+	            <h3 style="color:white;">TV Server</h3>            
+ 			</a>
+ 			<div style="margin-bottom: 30px;"></div>
+      </div>
+ 		<div class="col-md-3 mb-3 col-sm-6 " style="margin-right:100px">
+			<a href="/Media/ftp/ftpindex.html"  style="text-decoration: none;" >
+
+	            <img src="allM.png" style="height: 200px;width: 300px;" alt="Movie-Servers">
+	            <h3 style="color:white;">Movie Server</h3>            
+ 			</a>
+ 			<div style="margin-bottom: 30px;"></div>
+      </div>
+	  <div class="col-md-3 mb-3 col-sm-6 " style="margin-right:100px">
+		<a href="https://portal.inetbills.com/"  style="text-decoration: none;" >
+
+			<img src="login-icon.jpg" style="height: 200px;width: 300px;" alt="Login">
+			<h3 style="color:white;">Login: Your Profile</h3>          
+		 </a>
+		 <div style="margin-bottom: 30px;"></div>
+   </div>
+  
+
+
+	</div>
+</div>
+
+
+</body>
+</html>
