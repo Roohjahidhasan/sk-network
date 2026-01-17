@@ -548,7 +548,7 @@ export function BdixPortal() {
                     <Monitor className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold">Access Media Library</h3>
+                    <h3 className="text-2xl font-bold">Ebay</h3>
                     <p className="text-sm text-zinc-500">Stream your favorite content instantly</p>
                   </div>
                 </div>
@@ -561,7 +561,7 @@ export function BdixPortal() {
                 <iframe
                   src="https://play.roarzone.info/web/index.html#!/videos?serverId=1203d2762453416d96aee8f714e99a58&parentId=1395"
                   className="w-full h-[600px]"
-                  title="Manu Media Server"
+                  title="SK Network Media Server"
                   allowFullScreen
                 />
               </div>
