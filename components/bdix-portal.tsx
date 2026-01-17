@@ -559,7 +559,7 @@ export function BdixPortal() {
               </div>
               <div className="relative rounded-2xl overflow-hidden border border-zinc-800/50 bg-black shadow-2xl">
                 <iframe
-                  src="http://192.168.1.100:8096"
+                  src="https://play.roarzone.info/web/index.html#!/videos?serverId=1203d2762453416d96aee8f714e99a58&parentId=1395"
                   className="w-full h-[600px]"
                   title="Manu Media Server"
                   allowFullScreen
