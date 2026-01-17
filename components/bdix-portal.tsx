@@ -39,7 +39,7 @@ const tvChannels = [
   { name: "Channel 2", url: "http://172.17.50.112/", type: "local" },
   { name: "Channel 3", url: "http://10.99.99.99/", type: "local" },
   { name: "Channel 4", url: "http://10.10.10.2/", type: "local" },
-  { name: "Channel 5", url: "http://172.16.50.2/", type: "local" },
+  { name: "Channel 5", url: "http://moviemazic.xyz/live-tv/tsports.html", type: "local" },
   { name: "11Plus Live", url: "https://11plus.live/", type: "external" },
   { name: "Channel 6", url: "http://192.168.91.8/", type: "local" },
 ]
