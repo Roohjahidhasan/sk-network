@@ -25,7 +25,7 @@ const services: ServiceSlide[] = [
     description: 'Lightning-fast fiber optic connectivity for streaming, gaming, and work from home',
     image: '/fiber-optic-cables-glowing.jpg',
     speed: '100 Mbps',
-    price: '₳999/month',
+    price: '999 BDT/month',
     link: '#packages'
   },
   {
@@ -55,7 +55,7 @@ const services: ServiceSlide[] = [
     description: 'Get 100 Mbps + BDIX + Manu Media + 24/7 Support for one unbeatable price',
     image: '/bdix-bangladesh-internet-exchange.jpg',
     speed: 'All Features',
-    price: '₳1,499/month',
+    price: '1,499 BDT/month',
     link: '#packages'
   }
 ]
