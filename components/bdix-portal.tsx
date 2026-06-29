@@ -32,14 +32,14 @@ import { MediaPlayer } from "@/components/media-player"
 type Section = "live" | "movies" | "manu" | "tools"
 
 const tvChannels = [
-  { name: "Roarzone", url: "https://tv.roarzone.info/", type: "external" },
+  { name: "TSports", url: "http://moviemazic.xyz/live-tv/tsports.html", type: "external" },
   { name: "Cityplex Live", url: "http://live.cityplex.live/", type: "external" },
   { name: "Channel 1", url: "http://172.16.29.28/", type: "local" },
   { name: "Gazi TV", url: "http://moviemazic.xyz/live-tv/gazi-tv.html", type: "external" },
   { name: "Channel 2", url: "http://172.17.50.112/", type: "local" },
   { name: "Channel 3", url: "http://10.99.99.99/", type: "local" },
   { name: "Channel 4", url: "http://10.10.10.2/", type: "local" },
-  { name: "Channel 5", url: "http://moviemazic.xyz/live-tv/tsports.html", type: "local" },
+  { name: "Channel 5", url: "http://172.16.50.2/", type: "local" },
   { name: "11Plus Live", url: "https://11plus.live/", type: "external" },
   { name: "Channel 6", url: "http://192.168.91.8/", type: "local" },
 ]
@@ -548,7 +548,7 @@ export function BdixPortal() {
                     <Monitor className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold">Ebay</h3>
+                    <h3 className="text-2xl font-bold">Access Media Library</h3>
                     <p className="text-sm text-zinc-500">Stream your favorite content instantly</p>
                   </div>
                 </div>
@@ -559,9 +559,9 @@ export function BdixPortal() {
               </div>
               <div className="relative rounded-2xl overflow-hidden border border-zinc-800/50 bg-black shadow-2xl">
                 <iframe
-                  src="https://play.roarzone.info/web/index.html#!/videos?serverId=1203d2762453416d96aee8f714e99a58&parentId=1395"
+                  src="http://192.168.1.100:8096"
                   className="w-full h-[600px]"
-                  title="SK Network Media Server"
+                  title="Manu Media Server"
                   allowFullScreen
                 />
               </div>

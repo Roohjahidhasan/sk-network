@@ -1,7 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Plus_Jakarta_Sans } from "next/font/google"
-import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
 import { SupportWidget } from "@/components/support-widget"
 import "./globals.css"
@@ -35,7 +34,6 @@ export default function RootLayout({
           {children}
           <SupportWidget />
         </ThemeProvider>
-        <Analytics />
       </body>
     </html>
   )

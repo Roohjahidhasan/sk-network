@@ -2,19 +2,23 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { useState, useTransition } from "react"
+import { useState, useEffect } from "react"
 import { Menu, X, Sun, Moon } from "lucide-react"
-import { useTheme } from "next-themes"
 
 export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const { theme, setTheme } = useTheme()
-  const [isPending, startTransition] = useTransition()
+  const [theme, setTheme] = useState<string>("dark")
+
+  useEffect(() => {
+    const storedTheme = localStorage.getItem("theme") || "dark"
+    setTheme(storedTheme)
+  }, [])
 
   const handleThemeToggle = () => {
-    startTransition(() => {
-      setTheme(theme === "dark" ? "light" : "dark")
-    })
+    const newTheme = theme === "dark" ? "light" : "dark"
+    setTheme(newTheme)
+    localStorage.setItem("theme", newTheme)
+    document.documentElement.classList.toggle("dark", newTheme === "dark")
   }
 
   return (
